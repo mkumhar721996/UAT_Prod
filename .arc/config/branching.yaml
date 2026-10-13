@@ -1,0 +1,31 @@
+# Branching policy for bnts-arc (ADR-0121). Only the copy on the repo's DEFAULT branch
+# (GitHub repo setting — `develop` for this repo) counts; edits land via PR like any other config.
+version: 1
+
+# git-flow: `main` is the released line, `develop` is where item PRs land.
+template: git-flow
+
+# Released line. Explicit because the default branch is `develop`, and an absent `trunk`
+# would resolve to the default branch.
+trunk: main
+
+# Landing branch: feature branches fork from here and their PRs target it.
+integration_branch: develop
+
+# One branch per work item, e.g. ARC-STORY-089-add-login-page. {item_id} is required.
+work_branch_pattern: "{item_id}-{slug}"
+
+catch_up:
+  # Back-merge the landing branch into the feature branch + plain push. PRs are squash-merged,
+  # so rebase's linear history never reaches trunk; merge avoids force-pushing reviewed branches.
+  strategy: merge
+  # Agent resolves conflicts; a human reviews unless the resolution judge rates it "clean".
+  conflict_resolution_mode: middle_ground
+
+release:
+  # No release branch: the release PR goes straight develop -> main (merge commit, human gate).
+  # Set e.g. "release/{version}" to cut a release branch instead.
+  branch_pattern: null
+  # Tag pushed on main per release, from the user-typed version.
+  tag_pattern: "v{version}"
+
