@@ -9,9 +9,6 @@ template: github-flow
 # would resolve to the default branch.
 trunk: main
 
-# Landing branch: feature branches fork from here and their PRs target it.
-integration_branch: main
-
 # One branch per work item, e.g. ARC-STORY-089-add-login-page. {item_id} is required.
 work_branch_pattern: "{item_id}-{slug}"
 
