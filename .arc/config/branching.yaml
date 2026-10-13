@@ -3,14 +3,14 @@
 version: 1
 
 # git-flow: `main` is the released line, `develop` is where item PRs land.
-template: git-flow
+template: github-flow
 
 # Released line. Explicit because the default branch is `develop`, and an absent `trunk`
 # would resolve to the default branch.
 trunk: main
 
 # Landing branch: feature branches fork from here and their PRs target it.
-integration_branch: develop
+integration_branch: main
 
 # One branch per work item, e.g. ARC-STORY-089-add-login-page. {item_id} is required.
 work_branch_pattern: "{item_id}-{slug}"
